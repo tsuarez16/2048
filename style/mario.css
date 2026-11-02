@@ -1,0 +1,270 @@
+/* Mario-style page theme. Loaded after main.css; tiles are left untouched. */
+
+html, body {
+  background: #5c94fc;
+  color: #fff; }
+
+body {
+  padding-bottom: 80px; }
+
+.container {
+  position: relative;
+  z-index: 1;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.6); }
+
+h1.title {
+  font-family: "Press Start 2P", monospace;
+  font-size: 56px;
+  line-height: 90px;
+  color: #fff;
+  text-shadow: 5px 5px 0 #000; }
+
+a {
+  color: #fbd000; }
+
+hr {
+  border-bottom: 3px dashed rgba(255, 255, 255, 0.5); }
+
+.score-container, .best-container {
+  font-family: "Press Start 2P", monospace;
+  font-size: 18px;
+  background: #c84c0c;
+  border: 3px solid #000;
+  border-radius: 0;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
+  text-shadow: 2px 2px 0 #000; }
+  .score-container:after, .best-container:after {
+    font-family: "Press Start 2P", monospace;
+    font-size: 9px;
+    color: #fbd000; }
+  .score-container .score-addition, .best-container .score-addition {
+    color: #fbd000;
+    font-size: 16px; }
+
+.restart-button {
+  font-family: "Press Start 2P", monospace;
+  font-size: 12px;
+  background: #e52521;
+  border: 3px solid #000;
+  border-radius: 0;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
+  text-shadow: 2px 2px 0 #000; }
+  .restart-button:active {
+    box-shadow: none;
+    transform: translate(4px, 4px); }
+
+.game-container {
+  border: 4px solid #000;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.35);
+  text-shadow: none; }
+
+.game-container .game-message a {
+  font-family: "Press Start 2P", monospace;
+  font-size: 12px;
+  border-radius: 0;
+  background: #e52521;
+  border: 3px solid #000; }
+
+/* ---- Background world ---- */
+
+.mario-world {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none; }
+
+.mario-sky, .mario-stage {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0; }
+
+.mario-cloud {
+  position: absolute;
+  left: -200px;
+  width: 120px;
+  height: 36px;
+  background: #fff;
+  border-radius: 20px;
+  -webkit-animation: mario-drift linear infinite;
+  animation: mario-drift linear infinite; }
+  .mario-cloud:before, .mario-cloud:after {
+    content: "";
+    position: absolute;
+    background: #fff;
+    border-radius: 50%; }
+  .mario-cloud:before {
+    width: 50px;
+    height: 50px;
+    top: -26px;
+    left: 18px; }
+  .mario-cloud:after {
+    width: 40px;
+    height: 40px;
+    top: -18px;
+    left: 58px; }
+
+@-webkit-keyframes mario-drift {
+  from { left: -200px; }
+  to { left: 110%; } }
+@keyframes mario-drift {
+  from { left: -200px; }
+  to { left: 110%; } }
+
+.mario-ground {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #c84c0c;
+  background-image:
+    linear-gradient(#000 3px, transparent 3px),
+    linear-gradient(90deg, #000 3px, transparent 3px);
+  background-size: 48px 24px, 48px 48px;
+  border-top: 4px solid #000; }
+
+.mario-pipe {
+  position: absolute;
+  width: 64px;
+  background: linear-gradient(90deg, #2b7a2e, #6fd36f 35%, #43b047 60%, #2b7a2e);
+  border: 3px solid #000;
+  border-bottom: none;
+  box-sizing: border-box; }
+  .mario-pipe:before {
+    content: "";
+    position: absolute;
+    top: -3px;
+    left: -8px;
+    right: -8px;
+    height: 26px;
+    background: inherit;
+    border: 3px solid #000; }
+
+.mario-block {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  box-sizing: border-box;
+  border: 3px solid #000; }
+
+.mario-brick {
+  background-color: #c84c0c;
+  background-image:
+    linear-gradient(#000 2px, transparent 2px),
+    linear-gradient(90deg, #000 2px, transparent 2px);
+  background-size: 17px 17px;
+  background-position: -2px -2px; }
+
+.mario-question {
+  background: #fbd000;
+  box-shadow: inset -4px -4px 0 #c88400, inset 4px 4px 0 #ffe98a; }
+  .mario-question:after {
+    content: "?";
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-family: "Press Start 2P", monospace;
+    font-size: 18px;
+    line-height: 36px;
+    color: #c84c0c;
+    text-shadow: 2px 2px 0 #000;
+    -webkit-animation: mario-blink 1s steps(2) infinite;
+    animation: mario-blink 1s steps(2) infinite; }
+
+@-webkit-keyframes mario-blink {
+  50% { opacity: 0.4; } }
+@keyframes mario-blink {
+  50% { opacity: 0.4; } }
+
+.mario-bump {
+  -webkit-animation: mario-bump 220ms ease-out;
+  animation: mario-bump 220ms ease-out; }
+
+@-webkit-keyframes mario-bump {
+  40% { -webkit-transform: translateY(5px) scaleY(0.9); transform: translateY(5px) scaleY(0.9); } }
+@keyframes mario-bump {
+  40% { -webkit-transform: translateY(5px) scaleY(0.9); transform: translateY(5px) scaleY(0.9); } }
+
+.mario-coin {
+  position: absolute;
+  width: 16px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fbd000;
+  border: 3px solid #000;
+  box-shadow: inset -3px 0 0 #c88400;
+  -webkit-animation: mario-coin 700ms ease-out forwards;
+  animation: mario-coin 700ms ease-out forwards; }
+
+@-webkit-keyframes mario-coin {
+  0% { -webkit-transform: translateY(0) scaleX(1); transform: translateY(0) scaleX(1); opacity: 1; }
+  50% { -webkit-transform: translateY(-50px) scaleX(0.3); transform: translateY(-50px) scaleX(0.3); }
+  100% { -webkit-transform: translateY(-70px) scaleX(1); transform: translateY(-70px) scaleX(1); opacity: 0; } }
+@keyframes mario-coin {
+  0% { -webkit-transform: translateY(0) scaleX(1); transform: translateY(0) scaleX(1); opacity: 1; }
+  50% { -webkit-transform: translateY(-50px) scaleX(0.3); transform: translateY(-50px) scaleX(0.3); }
+  100% { -webkit-transform: translateY(-70px) scaleX(1); transform: translateY(-70px) scaleX(1); opacity: 0; } }
+
+.mario-character {
+  position: absolute;
+  top: 0;
+  left: 0;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  -webkit-transition: opacity 400ms;
+  transition: opacity 400ms;
+  will-change: transform; }
+
+.mario-leaving {
+  opacity: 0; }
+
+.mario-toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  z-index: 200;
+  padding: 14px 20px;
+  font-family: "Press Start 2P", monospace;
+  font-size: 12px;
+  color: #fff;
+  background: #000;
+  border: 3px solid #fff;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transform: translate(-50%, -100px);
+  transform: translate(-50%, -100px); }
+
+.mario-toast-show {
+  -webkit-animation: mario-toast 2.6s ease forwards;
+  animation: mario-toast 2.6s ease forwards; }
+
+@-webkit-keyframes mario-toast {
+  0% { opacity: 0; -webkit-transform: translate(-50%, -100px); transform: translate(-50%, -100px); }
+  12%, 85% { opacity: 1; -webkit-transform: translate(-50%, 0); transform: translate(-50%, 0); }
+  100% { opacity: 0; -webkit-transform: translate(-50%, -100px); transform: translate(-50%, -100px); } }
+@keyframes mario-toast {
+  0% { opacity: 0; -webkit-transform: translate(-50%, -100px); transform: translate(-50%, -100px); }
+  12%, 85% { opacity: 1; -webkit-transform: translate(-50%, 0); transform: translate(-50%, 0); }
+  100% { opacity: 0; -webkit-transform: translate(-50%, -100px); transform: translate(-50%, -100px); } }
+
+@media screen and (max-width: 520px) {
+  h1.title {
+    font-size: 24px;
+    line-height: 60px; }
+
+  .score-container, .best-container {
+    font-size: 12px; }
+
+  .restart-button {
+    font-size: 9px; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .mario-cloud, .mario-question:after {
+    -webkit-animation: none;
+    animation: none; } }
